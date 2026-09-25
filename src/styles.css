@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+}

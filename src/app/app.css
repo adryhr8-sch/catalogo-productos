@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productos {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    align-content: space-between;
+    width: 45%;
+    height: auto;
+    flex-wrap: wrap;
+    border: solid midnightblue 3px;
+    border-radius: 5%;
+    padding: 30px;
+}
+
+.producto-card {
+    background-color: aqua;
+    text-align: center;
+    width: 160px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.buscar-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 50%;
+    height: 35px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.busqueda {
+    background-color: darkgrey;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+}
+
+.debajo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 50%;
+    height: 35px;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.actualizar {
+    background-color: blue;
+    color: aliceblue;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+}

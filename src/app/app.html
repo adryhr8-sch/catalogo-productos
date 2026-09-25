@@ -1,0 +1,28 @@
+<main class="container">
+  <h2>Catálogo de Productos</h2>
+  <div class="buscar-block">
+    <input 
+      type="text" 
+      class="busqueda"
+      placeholder="Buscar producto..." 
+      [(ngModel)]="busqueda" 
+      (input)="filtrarProductos()"
+    />
+  </div>
+  <div class="productos">
+    @for (producto of mostrarProductos; track producto.id) {
+      <div class="producto-card">
+        <h3>{{ producto.nombre | uppercase}}</h3>
+        <p>Categoría: {{ producto.categoria }}</p>
+        <p>Precio: {{ producto.precio | currency:'MXN':'symbol' }}</p>
+        <p>Existencias: {{ producto.existencias }}</p>
+        <p>{{ producto.existencias | disponibilidad }}</p>
+      </div>
+    } @empty {
+      <p>No se encontraron productos.</p>
+    }
+  </div>
+  <div class="debajo">
+    <button class="actualizar" (click)="refrescar()">Actualizar</button>
+  </div>
+</main>
