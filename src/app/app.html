@@ -1,28 +1,83 @@
 <main class="container">
-  <h2>Catálogo de Productos</h2>
-  <div class="buscar-block">
-    <input 
-      type="text" 
-      class="busqueda"
-      placeholder="Buscar producto..." 
-      [(ngModel)]="busqueda" 
-      (input)="filtrarProductos()"
-    />
-  </div>
-  <div class="productos">
-    @for (producto of mostrarProductos; track producto.id) {
-      <div class="producto-card">
-        <h3>{{ producto.nombre | uppercase}}</h3>
-        <p>Categoría: {{ producto.categoria }}</p>
-        <p>Precio: {{ producto.precio | currency:'MXN':'symbol' }}</p>
-        <p>Existencias: {{ producto.existencias }}</p>
-        <p>{{ producto.existencias | disponibilidad }}</p>
-      </div>
-    } @empty {
-      <p>No se encontraron productos.</p>
+  <header class="encabezado">
+    <p class="eyebrow">Todo lo que buscas, en un solo lugar</p>
+    <h1>Catálogo de productos</h1>
+    <p class="subtitulo">Encuentra el producto ideal para ti.</p>
+  </header>
+
+  <section class="panel-filtros" aria-label="Buscar y filtrar productos">
+    <label class="buscar-block">
+      <svg class="icono-busqueda" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="10.8" cy="10.8" r="6.8"></circle>
+        <path d="m16 16 5 5"></path>
+      </svg>
+      <input
+        #campoBusqueda
+        class="busqueda"
+        type="search"
+        placeholder="Buscar por nombre..."
+        aria-label="Buscar productos por nombre"
+        (input)="buscar(campoBusqueda.value)"
+      />
+    </label>
+
+    <div class="controles-filtro">
+      <label class="filtro">
+        <span>Categoría</span>
+        <select #filtroCategoria aria-label="Filtrar por categoría" (change)="filtrarCategoria(filtroCategoria.value)">
+          <option value="todas">Todas las categorías</option>
+          @for (categoria of categorias(); track categoria) {
+            <option [value]="categoria">{{ categoria }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="filtro">
+        <span>Rango de precio</span>
+        <select #filtroPrecio (change)="filtrarPrecio(filtroPrecio.value)">
+          <option value="todos">Todos los precios</option>
+          <option value="economico">Hasta $200</option>
+          <option value="medio">$201 - $400</option>
+          <option value="alto">Más de $400</option>
+        </select>
+      </label>
+
+      <button class="actualizar" type="button" (click)="refrescar()">Actualizar</button>
+    </div>
+  </section>
+
+  <section class="resultados" aria-live="polite">
+    @if (errorCarga()) {
+      <p class="mensaje error">{{ errorCarga() }}</p>
+    } @else {
+      <p class="contador">
+        <strong>{{ totalProductos() }}</strong>
+        {{ totalProductos() === 1 ? 'producto encontrado' : 'productos encontrados' }}
+      </p>
+
+      @if (totalProductos() > 0) {
+        <div class="productos">
+          @for (producto of mostrarProductos(); track producto.id) {
+            <article class="producto-card">
+              <div class="imagen-contenedor">
+                <img [src]="producto.imagen" [alt]="'Imagen de ' + producto.nombre" />
+                <span class="etiqueta-categoria">{{ producto.categoria }}</span>
+              </div>
+              <div class="detalle-producto">
+                <h2>{{ producto.nombre }}</h2>
+                <p class="existencias">{{ producto.existencias | disponibilidad }}</p>
+                <p class="precio">{{ producto.precio | currency:'MXN':'symbol':'1.0-0' }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      } @else {
+        <div class="mensaje sin-resultados">
+          <span class="icono-vacio" aria-hidden="true">⌕</span>
+          <h2>No encontramos coincidencias</h2>
+          <p>Prueba con otro nombre, categoría o rango de precio.</p>
+        </div>
+      }
     }
-  </div>
-  <div class="debajo">
-    <button class="actualizar" (click)="refrescar()">Actualizar</button>
-  </div>
+  </section>
 </main>

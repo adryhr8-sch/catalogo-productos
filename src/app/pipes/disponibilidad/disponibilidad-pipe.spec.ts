@@ -1,4 +1,4 @@
-import { DisponibilidadPipe } from './disponibilidad-pipe';
+import DisponibilidadPipe from './disponibilidad-pipe';
 
 describe('DisponibilidadPipe', () => {
   it('create an instance', () => {

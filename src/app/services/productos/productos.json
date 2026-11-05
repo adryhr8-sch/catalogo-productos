@@ -4,41 +4,47 @@
     "nombre": "Libreta",
     "categoria": "Papelería",
     "precio": 75,
-    "existencias": 12
+    "existencias": 12,
+    "imagen": "https://images.unsplash.com/photo-1531346878377-a5be20888e57?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": 2,
     "nombre": "Plumones",
     "categoria": "Papelería",
     "precio": 120,
-    "existencias": 8
+    "existencias": 8,
+    "imagen": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": 3,
     "nombre": "Mouse",
     "categoria": "Tecnología",
     "precio": 250,
-    "existencias": 0
+    "existencias": 0,
+    "imagen": "https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": 4,
     "nombre": "Audífonos",
     "categoria": "Tecnología",
     "precio": 450,
-    "existencias": 5
+    "existencias": 5,
+    "imagen": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": 5,
     "nombre": "Botella",
     "categoria": "Accesorios",
     "precio": 150,
-    "existencias": 10
+    "existencias": 10,
+    "imagen": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80"
   },
   {
     "id": 6,
     "nombre": "Mochila",
     "categoria": "Accesorios",
     "precio": 550,
-    "existencias": 0
+    "existencias": 0,
+    "imagen": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80"
   }
 ]

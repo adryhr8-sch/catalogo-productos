@@ -1,8 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: aquamarine;
-    display: flex;
-    flex-direction: column;
+    background-color: #f3f6f1;
+    color: #193326;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
     margin: 0;
-    height: 100vh;
+    min-height: 100vh;
 }
