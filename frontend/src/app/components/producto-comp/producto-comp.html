@@ -1,0 +1,16 @@
+<article class="tarjeta" [class.seleccionada]="seleccionado()">
+  <button class="producto-card" type="button" (click)="seleccionar.emit(producto())" [attr.aria-pressed]="seleccionado()">
+    <div class="imagen-contenedor">
+      <img [src]="producto().imagen" [alt]="'Imagen de ' + producto().nombre" />
+      <span class="etiqueta-categoria">{{ producto().categoria }}</span>
+    </div>
+    <div class="detalle-producto">
+      <h2>{{ producto().nombre }}</h2>
+      <p class="existencias">{{ producto().existencias | disponibilidad }}</p>
+      <p class="precio">{{ producto().precio | currency: 'MXN' : 'symbol' : '1.0-0' }}</p>
+    </div>
+  </button>
+  <button type="button" class="boton-eliminar" (click)="eliminar.emit(producto().id)" [attr.aria-label]="'Eliminar ' + producto().nombre">
+    Eliminar
+  </button>
+</article>

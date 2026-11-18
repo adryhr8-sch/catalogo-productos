@@ -1,0 +1,52 @@
+<form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+  <div class="formulario-cabecera">
+    <p class="eyebrow">{{ producto() ? 'Editar producto' : 'Nuevo producto' }}</p>
+    <h2>{{ producto() ? 'Actualiza un producto' : 'Añade un producto' }}</h2>
+    <p class="descripcion">Completa los datos para mantener tu colección organizada.</p>
+  </div>
+
+  @if (producto()) {
+    <div class="campo">
+      <label for="id">Id</label>
+      <input type="text" id="id" [value]="producto()?.id" disabled />
+    </div>
+  }
+
+  <div class="campo">
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" formControlName="nombre" />
+  </div>
+  <div class="campo">
+    <label for="categoria">Categoría</label>
+    <input type="text" id="categoria" formControlName="categoria" />
+  </div>
+  <div class="campo">
+    <label for="precio">Precio</label>
+    <input type="number" id="precio" min="0" formControlName="precio" />
+  </div>
+  <div class="campo">
+    <label for="existencias">Existencias</label>
+    <input type="number" id="existencias" min="0" formControlName="existencias" />
+  </div>
+  <div class="campo">
+    <label for="imagen">Imagen</label>
+    <input
+      type="file"
+      accept="image/*"
+      id="imagen"
+      formControlName="imagen"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+  @if (errorCarga()) {
+    <p class="mensaje-error" role="alert">{{ errorCarga() }}</p>
+  }
+  <button
+    class="boton-guardar"
+    [class.guardando]="guardando()"
+    type="submit"
+    [disabled]="productoForm.invalid || guardando()"
+  >
+    {{ guardando() ? 'Guardando…' : producto() ? 'Guardar cambios' : 'Crear producto' }}
+  </button>
+</form>

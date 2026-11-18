@@ -5,6 +5,10 @@
     <p class="subtitulo">Encuentra el producto ideal para ti.</p>
   </header>
 
+  <section class="formulario" aria-label="Crear o editar productos">
+    <app-formulario [producto]="productoSeleccionado()" (guardado)="guardarProducto($event)" />
+  </section>
+
   <section class="panel-filtros" aria-label="Buscar y filtrar productos">
     <label class="buscar-block">
       <svg class="icono-busqueda" viewBox="0 0 24 24" aria-hidden="true">
@@ -24,7 +28,11 @@
     <div class="controles-filtro">
       <label class="filtro">
         <span>Categoría</span>
-        <select #filtroCategoria aria-label="Filtrar por categoría" (change)="filtrarCategoria(filtroCategoria.value)">
+        <select
+          #filtroCategoria
+          aria-label="Filtrar por categoría"
+          (change)="filtrarCategoria(filtroCategoria.value)"
+        >
           <option value="todas">Todas las categorías</option>
           @for (categoria of categorias(); track categoria) {
             <option [value]="categoria">{{ categoria }}</option>
@@ -42,6 +50,16 @@
         </select>
       </label>
 
+      <label class="filtro">
+        <span>Ordenar por</span>
+        <select #ordenaPor (change)="ordenarPor(ordenaPor.value)">
+          <option value="id">Id</option>
+          <option value="nombre">Nombre</option>
+          <option value="precio">Precio</option>
+          <option value="existencias">Existencias</option>
+        </select>
+      </label>
+
       <button class="actualizar" type="button" (click)="refrescar()">Actualizar</button>
     </div>
   </section>
@@ -54,21 +72,28 @@
         <strong>{{ totalProductos() }}</strong>
         {{ totalProductos() === 1 ? 'producto encontrado' : 'productos encontrados' }}
       </p>
+      <p class="contador">
+        Precio promedio:
+        <strong>{{ (precioPromedio() | number:'1.2-2') || '0.00' }}</strong>
+      </p>
+      <p class="contador">
+        Precio mínimo:
+        <strong>{{ (precioMinimo() | number:'1.2-2') || 0 }}</strong>
+      </p>
+      <p class="contador">
+        Precio máximo:
+        <strong>{{ (precioMaximo() | number:'1.2-2') || 0 }}</strong>
+      </p>
 
       @if (totalProductos() > 0) {
         <div class="productos">
           @for (producto of mostrarProductos(); track producto.id) {
-            <article class="producto-card">
-              <div class="imagen-contenedor">
-                <img [src]="producto.imagen" [alt]="'Imagen de ' + producto.nombre" />
-                <span class="etiqueta-categoria">{{ producto.categoria }}</span>
-              </div>
-              <div class="detalle-producto">
-                <h2>{{ producto.nombre }}</h2>
-                <p class="existencias">{{ producto.existencias | disponibilidad }}</p>
-                <p class="precio">{{ producto.precio | currency:'MXN':'symbol':'1.0-0' }}</p>
-              </div>
-            </article>
+            <app-producto-comp
+              [producto]="producto"
+              [seleccionado]="productoSeleccionado()?.id === producto.id"
+              (seleccionar)="seleccionarProducto($event)"
+              (eliminar)="eliminarProducto($event)"
+            />
           }
         </div>
       } @else {
